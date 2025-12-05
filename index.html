@@ -1,0 +1,848 @@
+
+<html>
+	<head>
+		<title>Mixtape</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<style type="text/css">
+			body {
+				font-size: 1.2em;
+				margin: 1em;
+				font-family: Helvetica, sans-serif;
+			}
+			h1 {
+				font-size: 1.2em;
+				font-weight: normal;
+				font-style: italic;
+			}
+			audio {
+				width: 100%;
+			}
+			p {
+				line-height: 1.5;
+			}
+			#wrapper {
+				margin: 1em auto 2em;
+				max-width: 30em;
+			}
+			#playlist {
+				list-style: decimal-leading-zero;
+				margin: 1em 0;
+			}
+			#playlist li {
+				margin: 0.5em 0;
+			}
+			li.active > a {
+				font-weight: bold;
+			}
+			li p {
+				display: none;
+			}
+			li.active p {
+				display: block;
+			}
+			#controls {
+				display: flex;
+				justify-content: space-between;
+				margin: 1em 0 2em;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrapper">
+			<h1>Mixtape</h1>
+			
+	
+		<audio id="player" preload="auto" tabindex="0" controls>
+			<source src="01.%20%20AL!AS%20%20-%20%20You%20%28Original%20Mix%29.mp3">
+		</audio>
+	
+
+			<div id="controls">
+				<a id="prev" href="#prev">&#x23EE; Previous</a>
+				<a id="next" href="#next">Next &#x23ED;</a>
+			</div>
+			
+	<ol id="playlist">
+		
+			<li class="active">
+				<a class="track" href="01.%20%20AL!AS%20%20-%20%20You%20%28Original%20Mix%29.mp3" data-artist="AL!AS" data-title="You (Original Mix)">AL!AS - You (Original Mix)</a>
+				
+	
+		<p>[Here I might introduce this mix.]</p>
+		<p>[Some notes about track 1.]</p>
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="02.%20%20C-Drench%20%20-%20%20Break-Up%20%28Instrumental%20Mix%29.mp3" data-artist="C-Drench" data-title="Break-Up (Instrumental Mix)">C-Drench - Break-Up (Instrumental Mix)</a>
+				
+	
+		<p>[Some notes about track 2.]</p>
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="03.%20%20Billys%20Pantelis%20%20-%20%20Danced%20In%20My%20Rhythm%20%28Bass%20Music%20Mix%29.mp3" data-artist="Billys Pantelis" data-title="Danced In My Rhythm (Bass Music Mix)">Billys Pantelis - Danced In My Rhythm (Bass Music Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="04.%20%20Psychoz%20&amp;%20Messinian%20%20-%20%20Forgotten%20Memories%20%28Vulture%20Heavy%20Dark%20Industrial%20Vocals%20Remix%29.mp3" data-artist="Psychoz &amp; Messinian" data-title="Forgotten Memories (Vulture Heavy Dark Industrial Vocals Remix)">Psychoz &amp; Messinian - Forgotten Memories (Vulture Heavy Dark Industrial Vocals Remix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="05.%20%20Enzymes%20%20-%20%20Microdots,%20Pt.%202%20%28Original%20Mix%29.mp3" data-artist="Enzymes" data-title="Microdots, Pt. 2 (Original Mix)">Enzymes - Microdots, Pt. 2 (Original Mix)</a>
+				
+	
+		<p>[Some notes about track 5.]</p>
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="06.%20%20DeadRomeo%20%20-%20%20UnHoly%20%28Original%20Mix%29.mp3" data-artist="DeadRomeo" data-title="UnHoly (Original Mix)">DeadRomeo - UnHoly (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="07.%20%20Dim%20Day%20%20-%20%20Get%20In%20Groove%20%28Original%20Mix%29.mp3" data-artist="Dim Day" data-title="Get In Groove (Original Mix)">Dim Day - Get In Groove (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="08.%20%20Amplified%20By%20Night%20%20-%20%20Fly%20So%20High%20%28Original%20Mix%29.mp3" data-artist="Amplified By Night" data-title="Fly So High (Original Mix)">Amplified By Night - Fly So High (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="09.%20%20Etherica%20%20-%20%20Senses%20%28Original%20Mix%29.mp3" data-artist="Etherica" data-title="Senses (Original Mix)">Etherica - Senses (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="10.%20%20Cohuna%20Beatz%20%20-%20%20Soul2Soul%20%28Nout%20Masalute%20Remix%29.mp3" data-artist="Cohuna Beatz" data-title="Soul2Soul (Nout Masalute Remix)">Cohuna Beatz - Soul2Soul (Nout Masalute Remix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="11.%20%20Franz%20Johann%20%20-%20%20Noise%20Pump%20%28Nout%20Masalute%20Remix%29.mp3" data-artist="Franz Johann" data-title="Noise Pump (Nout Masalute Remix)">Franz Johann - Noise Pump (Nout Masalute Remix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="12.%20%20Funk%20Phenomena%20%20-%20%20Khatarnak%20%28Original%20Mix%29.mp3" data-artist="Funk Phenomena" data-title="Khatarnak (Original Mix)">Funk Phenomena - Khatarnak (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="13.%20%20Invincible%20Quest%20%20-%20%20Grains%20Of%20Energy%20%28Original%20Mix%29.mp3" data-artist="Invincible Quest" data-title="Grains Of Energy (Original Mix)">Invincible Quest - Grains Of Energy (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="14.%20%20Kazuki%20%20-%20%2012th%20Chakra%20%28Original%20Mix%29.mp3" data-artist="Kazuki" data-title="12th Chakra (Original Mix)">Kazuki - 12th Chakra (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="15.%20%20Robert%20Nowicki%20%20-%20%20Killswitch%20%28Original%20Mix%29.mp3" data-artist="Robert Nowicki" data-title="Killswitch (Original Mix)">Robert Nowicki - Killswitch (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="16.%20%20Villa%20Violet%20%20-%20%20Destination%20%28Original%20Mix%29.mp3" data-artist="Villa Violet" data-title="Destination (Original Mix)">Villa Violet - Destination (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="17.%20%20DJ%20Mahk%20%20-%20%20Earthquake%20%28Original%20Mix%29.mp3" data-artist="DJ Mahk" data-title="Earthquake (Original Mix)">DJ Mahk - Earthquake (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="18.%20%20Bo%20Biz%20%20-%20%20BAMF%20Surprise%20%28Original%20Mix%29.mp3" data-artist="Bo Biz" data-title="BAMF Surprise (Original Mix)">Bo Biz - BAMF Surprise (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="19.%20%20Hedlok%20%20-%20%20Vibe%20Injection%20%28Original%20Mix%29.mp3" data-artist="Hedlok" data-title="Vibe Injection (Original Mix)">Hedlok - Vibe Injection (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="20.%20%20Intent%20To%20Sell%20%20-%20%20Saloon%20Fight%20%28Original%20Mix%29.mp3" data-artist="Intent To Sell" data-title="Saloon Fight (Original Mix)">Intent To Sell - Saloon Fight (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="21.%20%20Solarcube%20%20-%20%20We%20Never%20Die%20%28Original%20Mix%29.mp3" data-artist="Solarcube" data-title="We Never Die (Original Mix)">Solarcube - We Never Die (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="22.%20%20Recall%20%20-%20%20Genetica%20%28Original%20Mix%29.mp3" data-artist="Recall" data-title="Genetica (Original Mix)">Recall - Genetica (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="23.%20%20Synesthesia%20%20-%20%20Liquid%20Gold%20%28Original%20Mix%29.mp3" data-artist="Synesthesia" data-title="Liquid Gold (Original Mix)">Synesthesia - Liquid Gold (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="24.%20%20Vtech%20&amp;%20MC%20Jahvice%20%20-%20%20World%20Is%20A%20Ghetto%20%28Original%20Mix%29.mp3" data-artist="Vtech &amp; MC Jahvice" data-title="World Is A Ghetto (Original Mix)">Vtech &amp; MC Jahvice - World Is A Ghetto (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="25.%20%20Implant%20%20-%20%20Fm%20%28Original%20Mix%29.mp3" data-artist="Implant" data-title="Fm (Original Mix)">Implant - Fm (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="26.%20%20Kr4y%20%20-%20%20Brainrot%20%28Original%20Mix%29.mp3" data-artist="Kr4y" data-title="Brainrot (Original Mix)">Kr4y - Brainrot (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="27.%20%20Smoke%20Sign%20%20-%20%20Come%20Out%20&amp;%20Play%20%28Somabytes%20Remix%29.mp3" data-artist="Smoke Sign" data-title="Come Out &amp; Play (Somabytes Remix)">Smoke Sign - Come Out &amp; Play (Somabytes Remix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="28.%20%20SwaraTrip%20%20-%20%20Space%20Distance%20%28Original%20Mix%29.mp3" data-artist="SwaraTrip" data-title="Space Distance (Original Mix)">SwaraTrip - Space Distance (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="29.%20%20Stamatella%20%20-%20%20Lost%20%28Original%20Mix%29.mp3" data-artist="Stamatella" data-title="Lost (Original Mix)">Stamatella - Lost (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="30.%20%20Lost%20Shaman%20%20-%20%20Electronic%20Means%20%28Original%20Mix%29.mp3" data-artist="Lost Shaman" data-title="Electronic Means (Original Mix)">Lost Shaman - Electronic Means (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="31.%20%20SIRIUS%20MUSIC%20%20-%20%20Lucy%20In%20The%20Bright%20Blue%20Sky%20%28Original%20Mix%29.mp3" data-artist="SIRIUS MUSIC" data-title="Lucy In The Bright Blue Sky (Original Mix)">SIRIUS MUSIC - Lucy In The Bright Blue Sky (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="32.%20%20Adrian%20Feder%20%20-%20%2022%20%28Original%20Mix%29.mp3" data-artist="Adrian Feder" data-title="22 (Original Mix)">Adrian Feder - 22 (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="33.%20%20Twisted%20Desire%20%20-%20%20More%20Bass%20%28Original%20Mix%29.mp3" data-artist="Twisted Desire" data-title="More Bass (Original Mix)">Twisted Desire - More Bass (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="34.%20%20SoundSpirit%20%20-%20%20Love%20On%20Acid%20%28Original%20Mix%29.mp3" data-artist="SoundSpirit" data-title="Love On Acid (Original Mix)">SoundSpirit - Love On Acid (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="35.%20%20Vuchur%20%20-%20%20The%20Kundalini%20Nerve%20%28Original%20Mix%29.mp3" data-artist="Vuchur" data-title="The Kundalini Nerve (Original Mix)">Vuchur - The Kundalini Nerve (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="36.%20%20Solar%20Seed%20%20-%20%20Guitar%20Heaven%20%28Original%20Mix%29.mp3" data-artist="Solar Seed" data-title="Guitar Heaven (Original Mix)">Solar Seed - Guitar Heaven (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="37.%20%20Oplewing%20%20-%20%20Antidoto%20Nativo%20%28Original%20Mix%29.mp3" data-artist="Oplewing" data-title="Antidoto Nativo (Original Mix)">Oplewing - Antidoto Nativo (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="38.%20%20Dr.%20Psyhead%20%20-%20%20Nick%20The%20Freak%20%28Original%20Mix%29.mp3" data-artist="Dr. Psyhead" data-title="Nick The Freak (Original Mix)">Dr. Psyhead - Nick The Freak (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="39.%20%20Psycho%20Vibration%20%20-%20%20Finish%20Him%20%28Original%20Mix%29.mp3" data-artist="Psycho Vibration" data-title="Finish Him (Original Mix)">Psycho Vibration - Finish Him (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="40.%20%20Sentinel%20%20-%20%202086%20%28Original%20Mix%29.mp3" data-artist="Sentinel" data-title="2086 (Original Mix)">Sentinel - 2086 (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="41.%20%20Sadle%20%20-%20%20Citric%20Sun%20%28Original%20Mix%29.mp3" data-artist="Sadle" data-title="Citric Sun (Original Mix)">Sadle - Citric Sun (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="42.%20%20Upaya%20no%20Kensho%20%20-%20%20Death%20Is%20Not%20Real%20%28Original%20Mix%29.mp3" data-artist="Upaya no Kensho" data-title="Death Is Not Real (Original Mix)">Upaya no Kensho - Death Is Not Real (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="43.%20%20Subivk%20%20-%20%20Wandering%20Beauties%20%28Original%20Mix%29.mp3" data-artist="Subivk" data-title="Wandering Beauties (Original Mix)">Subivk - Wandering Beauties (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="44.%20%20Digital%20Tribe%20%20-%20%20Sweet%20Dreams%20%28Original%20Mix%29.mp3" data-artist="Digital Tribe" data-title="Sweet Dreams (Original Mix)">Digital Tribe - Sweet Dreams (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="45.%20%20Techno%20Tune%20%20-%20%20Techno%20Tuned%20%28Gravity%20Remix%29.mp3" data-artist="Techno Tune" data-title="Techno Tuned (Gravity Remix)">Techno Tune - Techno Tuned (Gravity Remix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="46.%20%20Random%20%20-%20%20Personal%20Game%20%28Original%20Mix%29.mp3" data-artist="Random" data-title="Personal Game (Original Mix)">Random - Personal Game (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="47.%20%20Aum%20Lab%20%20-%20%20Silver%20Threads%20%28Original%20Mix%29.mp3" data-artist="Aum Lab" data-title="Silver Threads (Original Mix)">Aum Lab - Silver Threads (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="48.%20%20Zenit%20Psy%20%20-%20%20Journey%20To%20Nowhere%20%28Original%20Mix%29.mp3" data-artist="Zenit Psy" data-title="Journey To Nowhere (Original Mix)">Zenit Psy - Journey To Nowhere (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="49.%20%20Trinodia%20%20-%20%20Fat%20Freaked%20And%20Funky%20%28Original%20Mix%29.mp3" data-artist="Trinodia" data-title="Fat Freaked And Funky (Original Mix)">Trinodia - Fat Freaked And Funky (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="50.%20%20California%20Sunshine%20%20-%20%20Alala%20%28Astro-D%20Remix%202016%29.mp3" data-artist="California Sunshine" data-title="Alala (Astro-D Remix 2016)">California Sunshine - Alala (Astro-D Remix 2016)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="51.%20%20Kymatica%20%20-%20%20Nothing%20Is%20Under%20Control%20%28Original%20Mix%29.mp3" data-artist="Kymatica" data-title="Nothing Is Under Control (Original Mix)">Kymatica - Nothing Is Under Control (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="52.%20%20Kyoto%20%20-%20%20Sundance%20%28Original%20Mix%29.mp3" data-artist="Kyoto" data-title="Sundance (Original Mix)">Kyoto - Sundance (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="53.%20%20N3V1773%20%20-%20%20Baga%202000%20%28Remix%29.mp3" data-artist="N3V1773" data-title="Baga 2000 (Remix)">N3V1773 - Baga 2000 (Remix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="54.%20%20Biokinetix%20&amp;%20Recto%20Verso%20%20-%20%20Metagenesis%20%28Mix%29.mp3" data-artist="Biokinetix &amp; Recto Verso" data-title="Metagenesis (Mix)">Biokinetix &amp; Recto Verso - Metagenesis (Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="55.%20%20Jayanta%20%20-%20%20Neon%20Soul%20%28Original%20Mix%29.mp3" data-artist="Jayanta" data-title="Neon Soul (Original Mix)">Jayanta - Neon Soul (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="56.%20%20Merlin%27s%20Apprentice%20%20-%20%20Sunshine%20Acid%20%28Original%20Mix%29.mp3" data-artist="Merlin&#39;s Apprentice" data-title="Sunshine Acid (Original Mix)">Merlin&#39;s Apprentice - Sunshine Acid (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="57.%20%20Phenotype%20%20-%20%20Super%20Fly%20%28Original%20Mix%29.mp3" data-artist="Phenotype" data-title="Super Fly (Original Mix)">Phenotype - Super Fly (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="58.%20%20Terapeutica%20%20-%20%20Extraterrestrial%20%28Original%20Mix%29.mp3" data-artist="Terapeutica" data-title="Extraterrestrial (Original Mix)">Terapeutica - Extraterrestrial (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="59.%20%20Tlamanik%20%20-%20%20Invictus%20%28Original%20Mix%29.mp3" data-artist="Tlamanik" data-title="Invictus (Original Mix)">Tlamanik - Invictus (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="60.%20%20Wizack%20Twizack%20%20-%20%20Cocktail%20Effect%20%28Original%20Mix%29.mp3" data-artist="Wizack Twizack" data-title="Cocktail Effect (Original Mix)">Wizack Twizack - Cocktail Effect (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="61.%20%20Deja%20Djinn%20%20-%20%20Spiirals%20%28Original%20Mix%29.mp3" data-artist="Deja Djinn" data-title="Spiirals (Original Mix)">Deja Djinn - Spiirals (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="62.%20%20Space%20Shift%20%20-%20%20Fractal%20Dimension%20%28Original%20Mix%29.mp3" data-artist="Space Shift" data-title="Fractal Dimension (Original Mix)">Space Shift - Fractal Dimension (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="63.%20%20Goa%20Luni%20%20-%20%20Get%20Lost%20%28Original%20Mix%29.mp3" data-artist="Goa Luni" data-title="Get Lost (Original Mix)">Goa Luni - Get Lost (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="64.%20%20Sychovibes%20%20-%20%20Love%20Syndrom%20%28Original%20Mix%29.mp3" data-artist="Sychovibes" data-title="Love Syndrom (Original Mix)">Sychovibes - Love Syndrom (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="65.%20%20Sychodelicious%20%20-%20%20Orgasmik%20Anthology%20%28Original%20Mix%29.mp3" data-artist="Sychodelicious" data-title="Orgasmik Anthology (Original Mix)">Sychodelicious - Orgasmik Anthology (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="66.%20%20Nostromosis%20%20-%20%20Old%20ROM%20%28Original%20Mix%29.mp3" data-artist="Nostromosis" data-title="Old ROM (Original Mix)">Nostromosis - Old ROM (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="67.%20%20Sixsense%20&amp;%20Vimana%20Shastra%20%20-%20%20Beyond%20This%20Planet%20%28Original%20Mix%29.mp3" data-artist="Sixsense &amp; Vimana Shastra" data-title="Beyond This Planet (Original Mix)">Sixsense &amp; Vimana Shastra - Beyond This Planet (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="68.%20%20Stuntproject%20%20-%20%20Mommy%20%28Original%20Mix%29.mp3" data-artist="Stuntproject" data-title="Mommy (Original Mix)">Stuntproject - Mommy (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="69.%20%20Raccoon%20%20-%20%20NoName%20%28Original%20Mix%29.mp3" data-artist="Raccoon" data-title="NoName (Original Mix)">Raccoon - NoName (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="70.%20%20Sunrazers%20%20-%20%20Heaven%20Is%20You%20%28Original%20Mix%29.mp3" data-artist="Sunrazers" data-title="Heaven Is You (Original Mix)">Sunrazers - Heaven Is You (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="71.%20%20Massive%20Dynamic%20%20-%20%20People%20End%20%28Original%20Mix%29.mp3" data-artist="Massive Dynamic" data-title="People End (Original Mix)">Massive Dynamic - People End (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="72.%20%20Xcursion%20%20-%20%20At%20The%20Gate%20%28Original%20Mix%29.mp3" data-artist="Xcursion" data-title="At The Gate (Original Mix)">Xcursion - At The Gate (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="73.%20%20Gen%20%20-%20%20Magic%20Forest%20%28Original%20Mix%29.mp3" data-artist="Gen" data-title="Magic Forest (Original Mix)">Gen - Magic Forest (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="74.%20%20Paraforce%20%20-%20%20Evergreen%20Place%20%28Original%20Mix%29.mp3" data-artist="Paraforce" data-title="Evergreen Place (Original Mix)">Paraforce - Evergreen Place (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="75.%20%20Red%20PsY%20%20-%20%20Unreal%20%28Original%20Mix%29.mp3" data-artist="Red PsY" data-title="Unreal (Original Mix)">Red PsY - Unreal (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="76.%20%20Kalilaskov%20AS%20%20-%20%20Bad%20Girls%20Go%20To%20Hell%20%28Original%20Mix%29.mp3" data-artist="Kalilaskov AS" data-title="Bad Girls Go To Hell (Original Mix)">Kalilaskov AS - Bad Girls Go To Hell (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="77.%20%20Meteor%20Burn%20%20-%20%20Brasov%20Has%20A%20Disease%20%28Original%20Mix%29.mp3" data-artist="Meteor Burn" data-title="Brasov Has A Disease (Original Mix)">Meteor Burn - Brasov Has A Disease (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="78.%20%20Psyfactor%20%20-%20%20Just%20Chaos%20%28Original%20Mix%29.mp3" data-artist="Psyfactor" data-title="Just Chaos (Original Mix)">Psyfactor - Just Chaos (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="79.%20%20Elephant%20%20-%20%20Tewah%20%28Original%20Mix%29.mp3" data-artist="Elephant" data-title="Tewah (Original Mix)">Elephant - Tewah (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="80.%20%20Eleusis%20&amp;%20Btoxik%20%20-%20%20Crazy%20Handful%20Of%20Nothing%20%28Original%20Mix%29.mp3" data-artist="Eleusis &amp; Btoxik" data-title="Crazy Handful Of Nothing (Original Mix)">Eleusis &amp; Btoxik - Crazy Handful Of Nothing (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="81.%20%20Chemikal%20Mind%20%20-%20%20Lugar%20De%20Misterio%20%28Original%20Mix%29.mp3" data-artist="Chemikal Mind" data-title="Lugar De Misterio (Original Mix)">Chemikal Mind - Lugar De Misterio (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="82.%20%20WeiRdel%20%20-%20%20Bravo%20Zulu%20%28Original%20Mix%29.mp3" data-artist="WeiRdel" data-title="Bravo Zulu (Original Mix)">WeiRdel - Bravo Zulu (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="83.%20%20Sample%20Bugs%20%20-%20%20Trella%20%28Original%20Mix%29.mp3" data-artist="Sample Bugs" data-title="Trella (Original Mix)">Sample Bugs - Trella (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="84.%20%20Universal%20Mind%20Gate%20%20-%20%20Dark%20Ohmega%20%28Original%20Mix%29.mp3" data-artist="Universal Mind Gate" data-title="Dark Ohmega (Original Mix)">Universal Mind Gate - Dark Ohmega (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="85.%20%20Shiva%20Shambho%20%20-%20%20Kali%20Meli%20%28Original%20Mix%29.mp3" data-artist="Shiva Shambho" data-title="Kali Meli (Original Mix)">Shiva Shambho - Kali Meli (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="86.%20%20Subliminal%20Insane%20%20-%20%20Demanding%20Ears%20%28Denstrow%20Remix%29.mp3" data-artist="Subliminal Insane" data-title="Demanding Ears (Denstrow Remix)">Subliminal Insane - Demanding Ears (Denstrow Remix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="87.%20%20Polyplex%20%20-%20%20Broken%20Pop%20%28Original%20Mix%29.mp3" data-artist="Polyplex" data-title="Broken Pop (Original Mix)">Polyplex - Broken Pop (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="88.%20%20Arc%20Voyager%2025%20%20-%20%20Recurring%20Numbers%20%28Original%20Mix%29.mp3" data-artist="Arc Voyager 25" data-title="Recurring Numbers (Original Mix)">Arc Voyager 25 - Recurring Numbers (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="89.%20%20Ancestral%20Connexion%20%20-%20%20Waiting%20Existence%20%28Original%20Mix%29.mp3" data-artist="Ancestral Connexion" data-title="Waiting Existence (Original Mix)">Ancestral Connexion - Waiting Existence (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="90.%20%20Hedlok%20%20-%20%20Mystics%20%28Original%20Mix%29.mp3" data-artist="Hedlok" data-title="Mystics (Original Mix)">Hedlok - Mystics (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="91.%20%20Christos%20Koulaxizis%20&amp;%20Dionisis%20Haritopoulos%20%20-%20%20Analog%20Calm%20%28Original%20Mix%29.mp3" data-artist="Christos Koulaxizis &amp; Dionisis Haritopoulos" data-title="Analog Calm (Original Mix)">Christos Koulaxizis &amp; Dionisis Haritopoulos - Analog Calm (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="92.%20%20Endemico%20%20-%20%20Please%20Insert%20Disk%202%20%28Original%20Mix%29.mp3" data-artist="Endemico" data-title="Please Insert Disk 2 (Original Mix)">Endemico - Please Insert Disk 2 (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="93.%20%20Jedidiah%20%20-%20%20Existence%20Being%20%28Original%20Mix%29.mp3" data-artist="Jedidiah" data-title="Existence Being (Original Mix)">Jedidiah - Existence Being (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="94.%20%20Phaze%20Control%20%20-%20%20Music%20From%20The%20Streets%20%28Original%20Mix%29.mp3" data-artist="Phaze Control" data-title="Music From The Streets (Original Mix)">Phaze Control - Music From The Streets (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="95.%20%20Amos%20%20-%20%20Things%20And%20Stuff%20%28Original%20Mix%29.mp3" data-artist="Amos" data-title="Things And Stuff (Original Mix)">Amos - Things And Stuff (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="96.%20%20PlanetaryChild%20%20-%20%20It%20Was%20In%20Yhe%20Sky%20%28Original%20Mix%29.mp3" data-artist="PlanetaryChild" data-title="It Was In Yhe Sky (Original Mix)">PlanetaryChild - It Was In Yhe Sky (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="97.%20%20Individuum%20%20-%20%20Overcoming%204%20%28Original%20Mix%29.mp3" data-artist="Individuum" data-title="Overcoming 4 (Original Mix)">Individuum - Overcoming 4 (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="98.%20%20Dusha%20%20-%20%20Aurora%20%28Original%20Mix%29.mp3" data-artist="Dusha" data-title="Aurora (Original Mix)">Dusha - Aurora (Original Mix)</a>
+				
+	
+
+			</li>
+		
+			<li>
+				<a class="track" href="99.%20%20Chichilcitlalli%20%20-%20%20Welcome%20To%20My%20Jungle%20%28Original%20Mix%29.mp3" data-artist="Chichilcitlalli" data-title="Welcome To My Jungle (Original Mix)">Chichilcitlalli - Welcome To My Jungle (Original Mix)</a>
+				
+	
+
+			</li>
+		
+	</ol>
+
+			
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var current = 0;
+			var $audio = $('#player');
+			var $playlist = $('#playlist');
+			var $tracks = $playlist.find('li a.track');
+			var len = $tracks.length;
+
+			$playlist.on('click', 'a.track', function (e) {
+				e.preventDefault();
+				link = $(this);
+				current = link.parent().index();
+				play(link, $audio[0]);
+			});
+			$audio[0].addEventListener('play', function (e) {
+				var $link = $('li.active > a');
+				setTrackMetadata($link);
+			});
+			$audio[0].addEventListener('ended', function (e) {
+				playNext();
+			});
+			$('a#next').on('click', function (e) {
+				e.preventDefault();
+				playNext();
+			});
+			$('a#prev').on('click', function (e) {
+				e.preventDefault();
+				playPrev();
+			});
+
+			function playPrev() {
+				current--;
+				if (current < 0) {
+					current = len - 1;
+				}
+				link = $playlist.find('a.track')[current];
+				play($(link), $audio[0]);
+			}
+
+			function playNext() {
+				current++;
+				if (current == len) {
+					current = 0;
+				}
+				link = $playlist.find('a.track')[current];
+				play($(link), $audio[0]);
+			}
+
+			function setTrackMetadata($link) {
+				if ('mediaSession' in navigator) {
+					
+					navigator.mediaSession.metadata = new MediaMetadata({
+						title: $link.data('title'),
+						artist: $link.data('artist'),
+					});
+				}
+			}
+
+			function play($link, $player) {
+				$player.src = $link.attr('href');
+				par = $link.parent();
+				par.addClass('active').siblings().removeClass('active');
+				$player.load();
+				$player.play();
+			}
+
+			if ('mediaSession' in navigator) {
+				
+				navigator.mediaSession.setActionHandler('nexttrack', playNext);
+				navigator.mediaSession.setActionHandler('previoustrack', playPrev);
+			}
+		});
+	</script>
+
+		</div>
+	</body>
+</html>
