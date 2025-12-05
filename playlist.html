@@ -1,8 +1,156 @@
-<iframe
-  allow="autoplay *; encrypted-media *;"
-  frameborder="0"
-  height="450"
-  style="width:100%; height:450px; overflow:hidden; background:transparent;"
-  sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-  src="https://embed.music.apple.com/us/playlist/edm-100/pl.u-AkAmmDksxjyJLo9">
-</iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDM 100 Mixtape</title>
+
+  <!-- SEO & OG -->
+  <meta name="description" content="EDM 100 Mixtape – Listen to the hottest EDM tracks on Apple Music.">
+  <meta name="keywords" content="EDM, Playlist, Apple Music, EDM 100, Jesse Jesse">
+  <meta property="og:title" content="EDM 100 Mixtape">
+  <meta property="og:description" content="Listen to the hottest EDM tracks on Apple Music.">
+  <meta property="og:image" content="./preview.png">
+  <meta property="og:url" content="https://100.jessejesse.com">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon & Icons -->
+  <link rel="icon" type="image/png" sizes="16x16" href="icon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="icon-48x48.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="icon-64x64.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="icon-128x128.png">
+  <link rel="icon" type="image/png" sizes="256x256" href="icon-256x256.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512x512.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    body {
+      background: #0d0d0d;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 0 5px #ccc;
+    }
+
+    .link, .linkz, .like-button {
+      display: inline-flex;
+      align-items: center;
+      margin: 10px 0 20px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    .link { color: #4ade80; }
+    .link:hover { color: #22c55e; }
+    .link i { margin-right: 8px; }
+
+    .linkz { color: #ff6ec7; }
+    .linkz:hover { color: #ff3ebf; }
+    .linkz i { margin-right: 8px; }
+
+    .like-button { 
+      color: #f87171; 
+      font-size: 1.2rem;
+      gap: 8px;
+    }
+    .like-button:hover { color: #ef4444; }
+
+    .player-wrapper {
+      width: 100%;
+      max-width: 660px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      margin-bottom: 20px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 600px; /* taller for easier mobile playback */
+      border: none;
+    }
+
+    @media (max-width: 700px) { iframe { height: 550px; } }
+    @media (max-width: 500px) { iframe { height: 500px; } }
+  </style>
+</head>
+<body>
+
+  <h1>EDM 100</h1>
+
+  <a class="link" href="https://music.apple.com/us/playlist/edm-100/pl.u-AkAmmDksxjyJLo9" target="_blank">
+    <i class="fas fa-music"></i>
+    Listen on Apple Music
+  </a>
+
+  <div class="player-wrapper">
+    <iframe
+      allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+      frameborder="0"
+      sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+      src="https://embed.music.apple.com/us/playlist/edm-100/pl.u-AkAmmDksxjyJLo9">
+    </iframe>
+  </div>
+
+  <a class="linkz" href="https://edm-100.pages.dev" target="_blank">
+    <i class="fas fa-globe"></i>
+    100.jessejesse.com
+  </a>
+
+  <!-- Likes Button -->
+  <div class="like-button" id="likeButton">
+    <i class="fas fa-heart"></i>
+    <span id="likeCount">0</span> Likes
+  </div>
+
+  <script>
+    const likeButton = document.getElementById('likeButton');
+    const likeCount = document.getElementById('likeCount');
+    const workerURL = 'https://likes.jessejesse.workers.dev/';
+
+    // Load initial likes
+    async function fetchLikes() {
+      try {
+        const res = await fetch(workerURL);
+        const data = await res.json();
+        likeCount.textContent = data.likes ?? 0;
+      } catch (err) {
+        console.error('Failed to fetch likes', err);
+      }
+    }
+
+    // Increment likes
+    likeButton.addEventListener('click', async () => {
+      try {
+        const res = await fetch(workerURL, { method: 'POST' });
+        const data = await res.json();
+        likeCount.textContent = data.likes ?? 0;
+      } catch (err) {
+        console.error('Failed to increment likes', err);
+      }
+    });
+
+    fetchLikes();
+  </script>
+
+</body>
+</html>
