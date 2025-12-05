@@ -48,6 +48,56 @@
 			}
 		</style>
 	</head>
+	<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const player = document.getElementById("player");
+    const playlist = document.querySelectorAll("#playlist li a.track");
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+
+    let index = 0;
+
+    function loadTrack(i) {
+        playlist.forEach(li => li.parentElement.classList.remove("active"));
+        playlist[i].parentElement.classList.add("active");
+
+        player.src = playlist[i].getAttribute("href");
+        player.play();
+        index = i;
+    }
+
+
+    playlist.forEach((track, i) => {
+        track.addEventListener("click", (e) => {
+            e.preventDefault();
+            loadTrack(i);
+        });
+    });
+
+  
+    nextBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        let next = index + 1;
+        if (next >= playlist.length) next = 0;
+        loadTrack(next);
+    });
+
+    prevBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        let prev = index - 1;
+        if (prev < 0) prev = playlist.length - 1;
+        loadTrack(prev);
+    });
+
+  
+    player.addEventListener("ended", () => {
+        let next = index + 1;
+        if (next >= playlist.length) next = 0;
+        loadTrack(next);
+    });
+});
+</script>
+
 	<body>
 		<div id="wrapper">
 			<h1>Mixtape</h1>
