@@ -13,12 +13,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: rgba(30, 41, 59, 0.3); }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #3b82f6 0%, #8b5cf6 100%); border-radius: 4px; }
-        .track-active { background: linear-gradient(90deg, rgba(59, 130, 246, 0.2) 0%, rgba(30, 41, 59, 0.7) 100%); border-left: 3px solid #3b82f6; }
-        .gradient-text { background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.3); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #000000 0%, #333333 100%); border-radius: 4px; }
+        .track-active { background: linear-gradient(90deg, rgba(0, 0, 0, 0.3) 0%, rgba(30, 41, 59, 0.7) 100%); border-left: 3px solid #000000; }
+        .gradient-text { background: linear-gradient(90deg, #000000 0%, #555555 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gradient-bg { background: linear-gradient(135deg, #000000 0%, #333333 100%); }
         @keyframes pulse-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
         .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .spin-slow { animation: spin-slow 20s linear infinite; }
+        .vinyl-shadow { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-200 min-h-screen">
@@ -30,35 +37,54 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <div class="lg:col-span-2 bg-gray-800 rounded-xl p-5">
-                <div class="mb-6">
-                    <div class="flex items-center mb-4">
-                        <div class="mr-4">
-                            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center pulse-glow">
-                                <i id="play-icon" class="fas fa-play text-white"></i>
+                <div class="flex flex-col md:flex-row gap-6 mb-6">
+                    <!-- Album Art -->
+                    <div class="flex-shrink-0">
+                        <div class="relative w-48 h-48 mx-auto">
+                            <div class="absolute inset-0 vinyl-shadow rounded-xl overflow-hidden">
+                                <img id="album-art" class="w-full h-full object-cover" alt="Album Art">
+                                <!-- Fallback vinyl -->
+                                <div id="vinyl-fallback" class="absolute inset-0 gradient-bg rounded-xl flex items-center justify-center">
+                                    <div class="w-40 h-40 rounded-full bg-gradient-to-br from-gray-900 to-black flex items-center justify-center spin-slow">
+                                        <div class="w-32 h-32 rounded-full bg-gradient-to-br from-black to-gray-800 flex items-center justify-center">
+                                            <div class="w-16 h-16 rounded-full bg-gray-900 border-4 border-gray-800"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <div class="flex items-center">
-                                <span class="text-xs font-semibold bg-blue-900 text-blue-200 px-2 py-1 rounded mr-2">
-                                    <i class="fas fa-play mr-1"></i>NOW PLAYING
-                                </span>
-                                <span id="track-number" class="text-sm text-gray-400">Track 01</span>
-                            </div>
-                            <h2 id="now-playing-title" class="text-xl font-bold text-white">AL!AS - You (Original Mix)</h2>
-                            <p id="now-playing-artist" class="text-gray-400">AL!AS</p>
                         </div>
                     </div>
                     
-                    <audio id="player" preload="auto" controls class="w-full rounded-lg">
-                        <source src="https://github.com/sudo-self/edm-100/raw/3f5e6b2afe8ea70496d01ea716b1677b0ffd5d36/01.%20%20AL!AS%20%20-%20%20You%20(Original%20Mix).mp3">
-                    </audio>
+                    <div class="flex-grow">
+                        <div class="flex items-center mb-4">
+                            <div class="mr-4">
+                                <div class="w-10 h-10 rounded-lg gradient-bg flex items-center justify-center pulse-glow">
+                                    <i id="play-icon" class="fas fa-play text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center">
+                                    <span class="text-xs font-semibold bg-black text-gray-300 px-2 py-1 rounded mr-2">
+                                        <i class="fas fa-play mr-1"></i>NOW PLAYING
+                                    </span>
+                                    <span id="track-number" class="text-sm text-gray-400">Track 01</span>
+                                </div>
+                                <h2 id="now-playing-title" class="text-xl font-bold text-white">AL!AS - You (Original Mix)</h2>
+                                <p id="now-playing-artist" class="text-gray-400">AL!AS</p>
+                            </div>
+                        </div>
+                        
+                        <audio id="player" preload="auto" controls class="w-full rounded-lg">
+                            <source src="https://github.com/sudo-self/edm-100/raw/3f5e6b2afe8ea70496d01ea716b1677b0ffd5d36/01.%20%20AL!AS%20%20-%20%20You%20(Original%20Mix).mp3">
+                        </audio>
+                    </div>
                 </div>
                 
                 <div class="flex justify-center space-x-4">
                     <button id="prev" class="p-3 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors">
                         <i class="fas fa-step-backward"></i>
                     </button>
-                    <button id="play-btn" class="p-4 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 transition-all">
+                    <button id="play-btn" class="p-4 rounded-full gradient-bg hover:bg-black transition-all">
                         <i class="fas fa-play"></i>
                     </button>
                     <button id="next" class="p-3 rounded-full bg-gray-700 hover:bg-gray-600 transition-colors">
@@ -69,25 +95,24 @@
             
             <div class="bg-gray-800 rounded-xl p-5">
                 <h3 class="text-xl font-bold mb-4 flex items-center">
-                    <i class="fas fa-list-ol mr-2 text-blue-400"></i> Web CD
+                    <i class="fas fa-list-ol mr-2 text-gray-300"></i> Web CD
                 </h3>
                 <div class="mb-4">
                     <div class="flex justify-between mb-1">
                         <span class="text-gray-400">Progress</span>
-                        <span class="text-blue-300 font-semibold" id="playlist-progress">1/99</span>
+                        <span class="text-gray-300 font-semibold" id="playlist-progress">1/99</span>
                     </div>
                     <div class="w-full bg-gray-700 rounded-full h-2">
-                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full transition-all duration-300" style="width: 1%" id="progress-bar"></div>
+                        <div class="gradient-bg h-2 rounded-full transition-all duration-300" style="width: 1%" id="progress-bar"></div>
                     </div>
                 </div>
                 <div class="space-y-2 text-gray-400">
-                    <p class="flex items-center"><i class="fas fa-music mr-2 text-blue-400"></i> 99 Tracks</p>
-                    <p class="flex items-center"><i class="fas fa-volume-up mr-2 text-purple-400"></i> 320kbps MP3</p>
-                   <p class="flex items-center">
-  <i class="fas fa-compact-disc mr-2 text-green-400"></i>
-  <a href="./playlist.html">On Apple Music</a>
-</p>
-
+                    <p class="flex items-center"><i class="fas fa-music mr-2 text-gray-300"></i> 99 Tracks</p>
+                    <p class="flex items-center"><i class="fas fa-volume-up mr-2 text-gray-300"></i> 320kbps MP3</p>
+                    <p class="flex items-center">
+                        <i class="fas fa-compact-disc mr-2 text-gray-300"></i>
+                        <a href="./playlist.html">On Apple Music</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -95,7 +120,7 @@
         <div class="bg-gray-800 rounded-xl p-5">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-bold flex items-center">
-                    <i class="fas fa-music mr-2 text-blue-400"></i> Track List
+                    <i class="fas fa-music mr-2 text-gray-300"></i> Track List
                 </h2>
                 <div class="text-sm text-gray-400">
                     <i class="fas fa-keyboard mr-1"></i> Space: Play/Pause • ←/→: Skip
@@ -409,11 +434,132 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
         $(document).ready(function () {
+            // Album art mapping
+            const albumArtMap = {
+                1: '01._ALAS_-_You_Original_Mix.jpg',
+                2: '02._C-Drench_-_Break-Up_Instrumental_Mix.jpg',
+                3: '03._Billys_Pantelis_-_Danced_In_My_Rhythm_Bass_Music_Mix.jpg',
+                4: '04._Psychoz_Messinian_-_Forgotten_Memories_Vulture_Heavy_Dark_Industrial_Vocals_Remix.jpg',
+                5: '05._Enzymes_-_Microdots_Pt._2_Original_Mix.jpg',
+                6: '06._DeadRomeo_-_UnHoly_Original_Mix.jpg',
+                7: '07._Dim_Day_-_Get_In_Groove_Original_Mix.jpg',
+                8: '08._Amplified_By_Night_-_Fly_So_High_Original_Mix.jpg',
+                9: '09._Etherica_-_Senses_Original_Mix.jpg',
+                10: '10._Cohuna_Beatz_-_Soul2Soul_Nout_Masalute_Remix.jpg',
+                11: '11._Franz_Johann_-_Noise_Pump_Nout_Masalute_Remix.jpg',
+                12: '12._Funk_Phenomena_-_Khatarnak_Original_Mix.jpg',
+                13: '13._Invincible_Quest_-_Grains_Of_Energy_Original_Mix.jpg',
+                14: '14._Kazuki_-_12th_Chakra_Original_Mix.jpg',
+                15: '15._Robert_Nowicki_-_Killswitch_Original_Mix.jpg',
+                16: '16._Villa_Violet_-_Destination_Original_Mix.jpg',
+                17: '17._DJ_Mahk_-_Earthquake_Original_Mix.jpg',
+                18: '18._Bo_Biz_-_BAMF_Surprise_Original_Mix.jpg',
+                19: '19._Hedlok_-_Vibe_Injection_Original_Mix.jpg',
+                20: '20._Intent_To_Sell_-_Saloon_Fight_Original_Mix.jpg',
+                21: '21._Solarcube_-_We_Never_Die_Original_Mix.jpg',
+                22: '22._Recall_-_Genetica_Original_Mix.jpg',
+                23: '23._Synesthesia_-_Liquid_Gold_Original_Mix.jpg',
+                24: '24._Vtech_MC_Jahvice_-_World_Is_A_Ghetto_Original_Mix.jpg',
+                25: '25._Implant_-_Fm_Original_Mix.jpg',
+                26: '26._Kr4y_-_Brainrot_Original_Mix.jpg',
+                27: '27._Smoke_Sign_-_Come_Out_Play_Somabytes_Remix.jpg',
+                28: '28._SwaraTrip_-_Space_Distance_Original_Mix.jpg',
+                29: '29._Stamatella_-_Lost_Original_Mix.jpg',
+                30: '30._Lost_Shaman_-_Electronic_Means_Original_Mix.jpg',
+                31: '31._SIRIUS_MUSIC_-_Lucy_In_The_Bright_Blue_Sky_Original_Mix.jpg',
+                32: '32._Adrian_Feder_-_22_Original_Mix.jpg',
+                33: '33._Twisted_Desire_-_More_Bass_Original_Mix.jpg',
+                34: '34._SoundSpirit_-_Love_On_Acid_Original_Mix.jpg',
+                35: '35._Vuchur_-_The_Kundalini_Nerve_Original_Mix.jpg',
+                36: '36._Solar_Seed_-_Guitar_Heaven_Original_Mix.jpg',
+                37: '37._Oplewing_-_Antidoto_Nativo_Original_Mix.jpg',
+                38: '38._Dr._Psyhead_-_Nick_The_Freak_Original_Mix.jpg',
+                39: '39._Psycho_Vibration_-_Finish_Him_Original_Mix.jpg',
+                40: '40._Sentinel_-_2086_Original_Mix.jpg',
+                41: '41._Sadle_-_Citric_Sun_Original_Mix.jpg',
+                42: '42._Upaya_no_Kensho_-_Death_Is_Not_Real_Original_Mix.jpg',
+                43: '43._Subivk_-_Wandering_Beauties_Original_Mix.jpg',
+                44: '44._Digital_Tribe_-_Sweet_Dreams_Original_Mix.jpg',
+                45: '45._Techno_Tune_-_Techno_Tuned_Gravity_Remix.jpg',
+                46: '46._Random_-_Personal_Game_Original_Mix.jpg',
+                47: '47._Aum_Lab_-_Silver_Threads_Original_Mix.jpg',
+                48: '48._Zenit_Psy_-_Journey_To_Nowhere_Original_Mix.jpg',
+                49: '49._Trinodia_-_Fat_Freaked_And_Funky_Original_Mix.jpg',
+                50: '50._California_Sunshine_-_Alala_Astro-D_Remix_2016.jpg',
+                51: '51._Kymatica_-_Nothing_Is_Under_Control_Original_Mix.jpg',
+                52: '52._Kyoto_-_Sundance_Original_Mix.jpg',
+                53: '53._N3V1773_-_Baga_2000_Remix.jpg',
+                54: '54._Biokinetix_Recto_Verso_-_Metagenesis_Mix.jpg',
+                55: '55._Jayanta_-_Neon_Soul_Original_Mix.jpg',
+                56: '56._Merlins_Apprentice_-_Sunshine_Acid_Original_Mix.jpg',
+                57: '57._Phenotype_-_Super_Fly_Original_Mix.jpg',
+                58: '58._Terapeutica_-_Extraterrestrial_Original_Mix.jpg',
+                59: '59._Tlamanik_-_Invictus_Original_Mix.jpg',
+                60: '60._Wizack_Twizack_-_Cocktail_Effect_Original_Mix.jpg',
+                61: '61._Deja_Djinn_-_Spiirals_Original_Mix.jpg',
+                62: '62._Space_Shift_-_Fractal_Dimension_Original_Mix.jpg',
+                63: '63._Goa_Luni_-_Get_Lost_Original_Mix.jpg',
+                64: '64._Sychovibes_-_Love_Syndrom_Original_Mix.jpg',
+                65: '65._Sychodelicious_-_Orgasmik_Anthology_Original_Mix.jpg',
+                66: '66._Nostromosis_-_Old_ROM_Original_Mix.jpg',
+                67: '67._Sixsense_Vimana_Shastra_-_Beyond_This_Planet_Original_Mix.jpg',
+                68: '68._Stuntproject_-_Mommy_Original_Mix.jpg',
+                69: '69._Raccoon_-_NoName_Original_Mix.jpg',
+                70: '70._Sunrazers_-_Heaven_Is_You_Original_Mix.jpg',
+                71: '71._Massive_Dynamic_-_People_End_Original_Mix.jpg',
+                72: '72._Xcursion_-_At_The_Gate_Original_Mix.jpg',
+                73: '73._Gen_-_Magic_Forest_Original_Mix.jpg',
+                74: '74._Paraforce_-_Evergreen_Place_Original_Mix.jpg',
+                75: '75._Red_PsY_-_Unreal_Original_Mix.jpg',
+                76: '76._Kalilaskov_AS_-_Bad_Girls_Go_To_Hell_Original_Mix.jpg',
+                77: '77._Meteor_Burn_-_Brasov_Has_A_Disease_Original_Mix.jpg',
+                78: '78._Psyfactor_-_Just_Chaos_Original_Mix.jpg',
+                79: '79._Elephant_-_Tewah_Original_Mix.jpg',
+                80: '80._Eleusis_Btoxik_-_Crazy_Handful_Of_Nothing_Original_Mix.jpg',
+                81: '81._Chemikal_Mind_-_Lugar_De_Misterio_Original_Mix.jpg',
+                82: '82._WeiRdel_-_Bravo_Zulu_Original_Mix.jpg',
+                83: '83._Sample_Bugs_-_Trella_Original_Mix.jpg',
+                84: '84._Universal_Mind_Gate_-_Dark_Ohmega_Original_Mix.jpg',
+                85: '85._Shiva_Shambho_-_Kali_Meli_Original_Mix.jpg',
+                86: '86._Subliminal_Insane_-_Demanding_Ears_Denstrow_Remix.jpg',
+                87: '87._Polyplex_-_Broken_Pop_Original_Mix.jpg',
+                88: '88._Arc_Voyager_25_-_Recurring_Numbers_Original_Mix.jpg',
+                89: '89._Ancestral_Connexion_-_Waiting_Existence_Original_Mix.jpg',
+                90: '90._Hedlok_-_Mystics_Original_Mix.jpg',
+                91: '91._Christos_Koulaxizis_Dionisis_Haritopoulos_-_Analog_Calm_Original_Mix.jpg',
+                92: '92._Endemico_-_Please_Disk_2_Original_Mix.jpg',
+                93: '93._Jedidiah_-_Existence_Being_Original_Mix.jpg',
+                94: '94._Phaze_Control_-_Music_From_The_Streets_Original_Mix.jpg',
+                95: '95._Amos_-_Things_And_Stuff_Original_Mix.jpg',
+                96: '96._PlanetaryChild_-_It_Was_In_Yhe_Sky_Original_Mix.jpg',
+                97: '97._Individuum_-_Overcoming_4_Original_Mix.jpg',
+                98: '98._Dusha_-_Aurora_Original_Mix.jpg',
+                99: '99._Chichilcitlalli_-_Welcome_To_My_Jungle_Original_Mix.jpg'
+            };
+            
             var current = 0;
             var $audio = $('#player');
             var $playlist = $('#playlist');
             var $tracks = $playlist.find('li a.track');
             var len = $tracks.length;
+
+            // Update album art
+            function updateAlbumArt(trackNum) {
+                const artFile = albumArtMap[trackNum];
+                const $albumArt = $('#album-art');
+                const $vinylFallback = $('#vinyl-fallback');
+                
+                if (artFile) {
+                    // Show album art, hide vinyl
+                    $albumArt.attr('src', `cover_art/${artFile}`);
+                    $albumArt.css('display', 'block');
+                    $vinylFallback.css('display', 'none');
+                } else {
+                    // Show vinyl, hide album art
+                    $albumArt.css('display', 'none');
+                    $vinylFallback.css('display', 'flex');
+                }
+            }
 
             $playlist.on('click', 'a.track', function (e) {
                 e.preventDefault();
@@ -427,11 +573,15 @@
                 setTrackMetadata($link);
                 $('#play-icon').removeClass('fa-play').addClass('fa-pause');
                 $('#play-btn i').removeClass('fa-play').addClass('fa-pause');
+                // Start vinyl spin when playing
+                $('.spin-slow').addClass('spin-slow');
             });
 
             $audio[0].addEventListener('pause', function () {
                 $('#play-icon').removeClass('fa-pause').addClass('fa-play');
                 $('#play-btn i').removeClass('fa-pause').addClass('fa-play');
+                // Stop vinyl spin when paused
+                $('.spin-slow').removeClass('spin-slow');
             });
 
             $audio[0].addEventListener('ended', function () {
@@ -495,6 +645,9 @@
                 $('#playlist-progress').text(trackNum + '/' + len);
                 $('#progress-bar').css('width', ((trackNum / len) * 100) + '%');
                 
+                // Update album art
+                updateAlbumArt(trackNum);
+                
                 if ('mediaSession' in navigator) {
                     navigator.mediaSession.metadata = new MediaMetadata({
                         title: title,
@@ -520,6 +673,9 @@
                 navigator.mediaSession.setActionHandler('nexttrack', playNext);
                 navigator.mediaSession.setActionHandler('previoustrack', playPrev);
             }
+            
+            // Initialize first track album art
+            updateAlbumArt(1);
         });
     </script>
 </body>
