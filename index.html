@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mixtape | EDM 100 Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --accent-color: #8b5cf6;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #wrapper {
+            width: 100%;
+            max-width: 1000px;
+            height: 85vh;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* LEFT SIDE: NOW PLAYING */
+        #now-playing-section {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-right: 1px solid var(--glass-border);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .album-art {
+            width: 260px;
+            height: 260px;
+            background: linear-gradient(45deg, var(--accent-color), #3b82f6);
+            border-radius: 50%;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            color: white;
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        /* Rotation logic */
+        @keyframes disc-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .spinning { animation: disc-spin 10s linear infinite; }
+        .paused { animation-play-state: paused; }
+
+        #info h2 { font-size: 1.6em; font-weight: 700; margin-bottom: 10px; min-height: 1.2em; }
+        #info p { color: var(--text-dim); font-size: 1.1em; margin-bottom: 30px; }
+
+        audio {
+            width: 100%;
+            filter: invert(100%) hue-rotate(180deg) brightness(1.5);
+            margin-bottom: 25px;
+        }
+
+        .custom-controls { display: flex; gap: 40px; align-items: center; }
+        .control-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .control-btn:hover { color: var(--accent-color); transform: scale(1.1); }
+
+        /* RIGHT SIDE: PLAYLIST */
+        #playlist-section { display: flex; flex-direction: column; overflow: hidden; background: rgba(0,0,0,0.1); }
+        .playlist-header {
+            padding: 25px 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #playlist {
+            list-style: none;
+            overflow-y: auto;
+            flex-grow: 1;
+            padding: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-color) transparent;
+        }
+
+        #playlist li {
+            margin-bottom: 4px;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+
+        #playlist li a {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            color: var(--text-dim);
+            font-size: 0.95em;
+        }
+
+        #playlist li:hover { background: rgba(255, 255, 255, 0.05); }
+        #playlist li.active { background: var(--accent-color); box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3); }
+        #playlist li.active a { color: white; font-weight: 600; }
+
+        .track-num { width: 30px; opacity: 0.5; font-family: monospace; font-size: 0.9em; }
+
+        /* Scrollbar styling */
+        #playlist::-webkit-scrollbar { width: 6px; }
+        #playlist::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
+
+        @media (max-width: 850px) {
+            #wrapper { grid-template-columns: 1fr; height: auto; max-height: 95vh; }
+            #now-playing-section { border-right: none; border-bottom: 1px solid var(--glass-border); }
+            #playlist-section { height: 450px; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="now-playing-section">
+        <div class="album-art spinning paused" id="disc">
+            <i class="fas fa-compact-disc"></i>
+        </div>
+        <div id="info">
+            <h2 id="current-title">Select a Track</h2>
+            <p id="current-artist">Ready to play</p>
+        </div>
+
+        <audio id="player" controls preload="auto">
+            <source src="01-alas-you-original-mix.mp3">
+        </audio>
+
+        <div class="custom-controls">
+            <button class="control-btn" id="prevBtn"><i class="fas fa-step-backward"></i></button>
+            <button class="control-btn" id="nextBtn"><i class="fas fa-step-forward"></i></button>
+        </div>
+    </div>
+
+    <div id="playlist-section">
+        <div class="playlist-header">
+            <h3>EDM 100</h3>
+            <span style="opacity: 0.5; font-size: 0.8em;">100 Tracks</span>
+        </div>
+        <ol id="playlist">
+            <li class="active"><a class="track" href="01-alas-you-original-mix.mp3" data-artist="AL!AS" data-title="You (Original Mix)"><span class="track-num">01</span> You (Original Mix)</a></li>
+            <li><a class="track" href="02-c-drench-break-up-instrumental-mix.mp3" data-artist="C-Drench" data-title="Break-Up (Instrumental Mix)"><span class="track-num">02</span> Break-Up (Instrumental Mix)</a></li>
+            <li><a class="track" href="03-billys-pantelis-danced-in-my-rhythm-bass-music-mix.mp3" data-artist="Billys Pantelis" data-title="Danced In My Rhythm"><span class="track-num">03</span> Danced In My Rhythm</a></li>
+            <li><a class="track" href="04-psychoz-messinian-forgotten-memories-vulture-heavy-dark-industrial-vocals-remix.mp3" data-artist="Psychoz & Messinian" data-title="Forgotten Memories"><span class="track-num">04</span> Forgotten Memories</a></li>
+            <li><a class="track" href="05-enzymes-microdots-pt-2-original-mix.mp3" data-artist="Enzymes" data-title="Microdots, Pt. 2"><span class="track-num">05</span> Microdots, Pt. 2</a></li>
+            <li><a class="track" href="06-deadromeo-unholy-original-mix.mp3" data-artist="DeadRomeo" data-title="UnHoly"><span class="track-num">06</span> UnHoly</a></li>
+            <li><a class="track" href="07-dim-day-get-in-groove-original-mix.mp3" data-artist="Dim Day" data-title="Get In Groove"><span class="track-num">07</span> Get In Groove</a></li>
+            <li><a class="track" href="08-amplified-by-night-fly-so-high-original-mix.mp3" data-artist="Amplified By Night" data-title="Fly So High"><span class="track-num">08</span> Fly So High</a></li>
+            <li><a class="track" href="09-etherica-senses-original-mix.mp3" data-artist="Etherica" data-title="Senses"><span class="track-num">09</span> Senses</a></li>
+            <li><a class="track" href="10-cohuna-beatz-soul2soul-nout-masalute-remix.mp3" data-artist="Cohuna Beatz" data-title="Soul2Soul (Remix)"><span class="track-num">10</span> Soul2Soul</a></li>
+            <li><a class="track" href="11-franz-johann-noise-pump-nout-masalute-remix.mp3" data-artist="Franz Johann" data-title="Noise Pump (Remix)"><span class="track-num">11</span> Noise Pump</a></li>
+            <li><a class="track" href="12-funk-phenomena-khatarnak-original-mix.mp3" data-artist="Funk Phenomena" data-title="Khatarnak"><span class="track-num">12</span> Khatarnak</a></li>
+            <li><a class="track" href="13-invincible-quest-grains-of-energy-original-mix.mp3" data-artist="Invincible Quest" data-title="Grains of Energy"><span class="track-num">13</span> Grains of Energy</a></li>
+            <li><a class="track" href="14-kazuki-12th-chakra-original-mix.mp3" data-artist="Kazuki" data-title="12th Chakra"><span class="track-num">14</span> 12th Chakra</a></li>
+            <li><a class="track" href="15-robert-nowicki-killswitch-original-mix.mp3" data-artist="Robert Nowicki" data-title="Killswitch"><span class="track-num">15</span> Killswitch</a></li>
+            <li><a class="track" href="16-villa-violet-destination-original-mix.mp3" data-artist="Villa Violet" data-title="Destination"><span class="track-num">16</span> Destination</a></li>
+            <li><a class="track" href="17-dj-mahk-earthquake-original-mix.mp3" data-artist="DJ Mahk" data-title="Earthquake"><span class="track-num">17</span> Earthquake</a></li>
+            <li><a class="track" href="18-bo-biz-bamf-surprise-original-mix.mp3" data-artist="Bo Biz" data-title="BAMF Surprise"><span class="track-num">18</span> BAMF Surprise</a></li>
+            <li><a class="track" href="19-hedlok-vibe-injection-original-mix.mp3" data-artist="Hedlok" data-title="Vibe Injection"><span class="track-num">19</span> Vibe Injection</a></li>
+            <li><a class="track" href="20-intent-to-sell-saloon-fight-original-mix.mp3" data-artist="Intent To Sell" data-title="Saloon Fight"><span class="track-num">20</span> Saloon Fight</a></li>
+            <li><a class="track" href="21-solarcube-we-never-die-original-mix.mp3" data-artist="Solarcube" data-title="We Never Die"><span class="track-num">21</span> We Never Die</a></li>
+            <li><a class="track" href="22-recall-genetica-original-mix.mp3" data-artist="Recall" data-title="Genetica"><span class="track-num">22</span> Genetica</a></li>
+            <li><a class="track" href="23-synesthesia-liquid-gold-original-mix.mp3" data-artist="Synesthesia" data-title="Liquid Gold"><span class="track-num">23</span> Liquid Gold</a></li>
+            <li><a class="track" href="24-vtech-mc-jahvice-world-is-a-ghetto-original-mix.mp3" data-artist="Vtech & MC" data-title="World is a Ghetto"><span class="track-num">24</span> World is a Ghetto</a></li>
+            <li><a class="track" href="25-implant-fm-original-mix.mp3" data-artist="Implant" data-title="FM"><span class="track-num">25</span> FM</a></li>
+            <li><a class="track" href="26-kr4y-brainrot-original-mix.mp3" data-artist="Kr4y" data-title="Brainrot"><span class="track-num">26</span> Brainrot</a></li>
+            <li><a class="track" href="27-smoke-sign-come-out-play-somabytes-remix.mp3" data-artist="Smoke Sign" data-title="Come Out & Play"><span class="track-num">27</span> Come Out & Play</a></li>
+            <li><a class="track" href="28-swaratrip-space-distance-original-mix.mp3" data-artist="SwaraTrip" data-title="Space Distance"><span class="track-num">28</span> Space Distance</a></li>
+            <li><a class="track" href="29-stamatella-lost-original-mix.mp3" data-artist="Stamatella" data-title="Lost"><span class="track-num">29</span> Lost</a></li>
+            <li><a class="track" href="30-lost-shaman-electronic-means-original-mix.mp3" data-artist="Lost Shaman" data-title="Electronic Means"><span class="track-num">30</span> Electronic Means</a></li>
+            <li><a class="track" href="31-sirius-music-lucy-in-the-bright-blue-sky-original-mix.mp3" data-artist="Sirius Music" data-title="Lucy In The Sky"><span class="track-num">31</span> Lucy In The Sky</a></li>
+            <li><a class="track" href="32-adrian-feder-22-original-mix.mp3" data-artist="Adrian Feder" data-title="22"><span class="track-num">32</span> 22</a></li>
+            <li><a class="track" href="33-twisted-desire-more-bass-original-mix.mp3" data-artist="Twisted Desire" data-title="More Bass"><span class="track-num">33</span> More Bass</a></li>
+            <li><a class="track" href="34-soundspirit-love-on-acid-original-mix.mp3" data-artist="SoundSpirit" data-title="Love On Acid"><span class="track-num">34</span> Love On Acid</a></li>
+            <li><a class="track" href="35-vuchur-the-kundalini-nerve-original-mix.mp3" data-artist="Vuchur" data-title="Kundalini Nerve"><span class="track-num">35</span> Kundalini Nerve</a></li>
+            <li><a class="track" href="36-solar-seed-guitar-heaven-original-mix.mp3" data-artist="Solar Seed" data-title="Guitar Heaven"><span class="track-num">36</span> Guitar Heaven</a></li>
+            <li><a class="track" href="37-oplewing-antidoto-nativo-original-mix.mp3" data-artist="Oplewing" data-title="Antidoto Nativo"><span class="track-num">37</span> Antidoto Nativo</a></li>
+            <li><a class="track" href="38-dr-psyhead-nick-the-freak-original-mix.mp3" data-artist="Dr. Psyhead" data-title="Nick the Freak"><span class="track-num">38</span> Nick the Freak</a></li>
+            <li><a class="track" href="39-psycho-vibration-finish-him-original-mix.mp3" data-artist="Psycho Vibration" data-title="Finish Him"><span class="track-num">39</span> Finish Him</a></li>
+            <li><a class="track" href="40-sentinel-2086-original-mix.mp3" data-artist="Sentinel" data-title="2086"><span class="track-num">40</span> 2086</a></li>
+            <li><a class="track" href="41-sadle-citric-sun-original-mix.mp3" data-artist="Sadle" data-title="Citric Sun"><span class="track-num">41</span> Citric Sun</a></li>
+            <li><a class="track" href="42-upaya-no-kensho-death-is-not-real-original-mix.mp3" data-artist="Upaya" data-title="Death Is Not Real"><span class="track-num">42</span> Death Is Not Real</a></li>
+            <li><a class="track" href="43-subivk-wandering-beauties-original-mix.mp3" data-artist="Subivk" data-title="Wandering Beauties"><span class="track-num">43</span> Wandering Beauties</a></li>
+            <li><a class="track" href="44-digital-tribe-sweet-dreams-original-mix.mp3" data-artist="Digital Tribe" data-title="Sweet Dreams"><span class="track-num">44</span> Sweet Dreams</a></li>
+            <li><a class="track" href="45-techno-tune-techno-tuned-gravity-remix.mp3" data-artist="Techno Tune" data-title="Techno Tuned"><span class="track-num">45</span> Techno Tuned</a></li>
+            <li><a class="track" href="46-random-personal-game-original-mix.mp3" data-artist="Random" data-title="Personal Game"><span class="track-num">46</span> Personal Game</a></li>
+            <li><a class="track" href="47-aum-lab-silver-threads-original-mix.mp3" data-artist="Aum Lab" data-title="Silver Threads"><span class="track-num">47</span> Silver Threads</a></li>
+            <li><a class="track" href="48-zenit-psy-journey-to-nowhere-original-mix.mp3" data-artist="Zenit Psy" data-title="Journey To Nowhere"><span class="track-num">48</span> Journey To Nowhere</a></li>
+            <li><a class="track" href="49-trinodia-fat-freaked-and-funky-original-mix.mp3" data-artist="Trinodia" data-title="Fat & Funky"><span class="track-num">49</span> Fat & Funky</a></li>
+            <li><a class="track" href="50-california-sunshine-alala-astro-d-remix-2016.mp3" data-artist="California" data-title="Alala (Remix)"><span class="track-num">50</span> Alala (Remix)</a></li>
+            <li><a class="track" href="51-kymatica-nothing-is-under-control-original-mix.mp3" data-artist="Kymatica" data-title="Nothing is Controlled"><span class="track-num">51</span> Nothing is Controlled</a></li>
+            <li><a class="track" href="52-kyoto-sundance-original-mix.mp3" data-artist="Kyoto" data-title="Sundance"><span class="track-num">52</span> Sundance</a></li>
+            <li><a class="track" href="53-n3v1773-baga-2000-remix.mp3" data-artist="N3V1773" data-title="Baga 2000"><span class="track-num">53</span> Baga 2000</a></li>
+            <li><a class="track" href="54-biokinetix-recto-verso-metagenesis-mix.mp3" data-artist="Biokinetix" data-title="Metagenesis"><span class="track-num">54</span> Metagenesis</a></li>
+            <li><a class="track" href="55-jayanta-neon-soul-original-mix.mp3" data-artist="Jayanta" data-title="Neon Soul"><span class="track-num">55</span> Neon Soul</a></li>
+            <li><a class="track" href="56-merlins-apprentice-sunshine-acid-original-mix.mp3" data-artist="Merlin" data-title="Sunshine Acid"><span class="track-num">56</span> Sunshine Acid</a></li>
+            <li><a class="track" href="57-phenotype-super-fly-original-mix.mp3" data-artist="Phenotype" data-title="Super Fly"><span class="track-num">57</span> Super Fly</a></li>
+            <li><a class="track" href="58-terapeutica-extraterrestrial-original-mix.mp3" data-artist="Terapeutica" data-title="Extraterrestrial"><span class="track-num">58</span> Extraterrestrial</a></li>
+            <li><a class="track" href="59-tlamanik-invictus-original-mix.mp3" data-artist="Tlamanik" data-title="Invictus"><span class="track-num">59</span> Invictus</a></li>
+            <li><a class="track" href="60-wizack-twizack-cocktail-effect-original-mix.mp3" data-artist="Wizack" data-title="Cocktail Effect"><span class="track-num">60</span> Cocktail Effect</a></li>
+            <li><a class="track" href="61-deja-djinn-spiirals-original-mix.mp3" data-artist="Deja Djinn" data-title="Spiirals"><span class="track-num">61</span> Spiirals</a></li>
+            <li><a class="track" href="62-space-shift-fractal-dimension-original-mix.mp3" data-artist="Space Shift" data-title="Fractal Dimension"><span class="track-num">62</span> Fractal Dimension</a></li>
+            <li><a class="track" href="63-goa-luni-get-lost-original-mix.mp3" data-artist="Goa Luni" data-title="Get Lost"><span class="track-num">63</span> Get Lost</a></li>
+            <li><a class="track" href="64-sychovibes-love-syndrom-original-mix.mp3" data-artist="Sychovibes" data-title="Love Syndrom"><span class="track-num">64</span> Love Syndrom</a></li>
+            <li><a class="track" href="65-sychodelicious-orgasmik-anthology-original-mix.mp3" data-artist="Sychodelicious" data-title="Orgasmik Anthology"><span class="track-num">65</span> Orgasmik</a></li>
+            <li><a class="track" href="66-nostromosis-old-rom-original-mix.mp3" data-artist="Nostromosis" data-title="Old ROM"><span class="track-num">66</span> Old ROM</a></li>
+            <li><a class="track" href="67-sixsense-vimana-shastra-beyond-this-planet-original-mix.mp3" data-artist="Sixsense" data-title="Beyond This Planet"><span class="track-num">67</span> Beyond Planet</a></li>
+            <li><a class="track" href="68-stuntproject-mommy-original-mix.mp3" data-artist="Stuntproject" data-title="Mommy"><span class="track-num">68</span> Mommy</a></li>
+            <li><a class="track" href="69-raccoon-noname-original-mix.mp3" data-artist="Raccoon" data-title="NoName"><span class="track-num">69</span> NoName</a></li>
+            <li><a class="track" href="70-sunrazers-heaven-is-you-original-mix.mp3" data-artist="Sunrazers" data-title="Heaven Is You"><span class="track-num">70</span> Heaven Is You</a></li>
+            <li><a class="track" href="71-massive-dynamic-people-end-original-mix.mp3" data-artist="Massive Dynamic" data-title="People End"><span class="track-num">71</span> People End</a></li>
+            <li><a class="track" href="72-xcursion-at-the-gate-original-mix.mp3" data-artist="Xcursion" data-title="At The Gate"><span class="track-num">72</span> At The Gate</a></li>
+            <li><a class="track" href="73-gen-magic-forest-original-mix.mp3" data-artist="Gen" data-title="Magic Forest"><span class="track-num">73</span> Magic Forest</a></li>
+            <li><a class="track" href="74-paraforce-evergreen-place-original-mix.mp3" data-artist="Paraforce" data-title="Evergreen Place"><span class="track-num">74</span> Evergreen Place</a></li>
+            <li><a class="track" href="75-red-psy-unreal-original-mix.mp3" data-artist="Red PsY" data-title="Unreal"><span class="track-num">75</span> Unreal</a></li>
+            <li><a class="track" href="76-kalilaskov-as-bad-girls-go-to-hell-original-mix.mp3" data-artist="Kalilaskov" data-title="Bad Girls"><span class="track-num">76</span> Bad Girls</a></li>
+            <li><a class="track" href="77-meteor-burn-brasov-has-a-disease-original-mix.mp3" data-artist="Meteor Burn" data-title="Brasov Disease"><span class="track-num">77</span> Brasov Disease</a></li>
+            <li><a class="track" href="78-psyfactor-just-chaos-original-mix.mp3" data-artist="Psyfactor" data-title="Just Chaos"><span class="track-num">78</span> Just Chaos</a></li>
+            <li><a class="track" href="79-elephant-tewah-original-mix.mp3" data-artist="Elephant" data-title="Tewah"><span class="track-num">79</span> Tewah</a></li>
+            <li><a class="track" href="80-eleusis-btoxik-crazy-handful-of-nothing-original-mix.mp3" data-artist="Eleusis" data-title="Crazy Handful"><span class="track-num">80</span> Crazy Handful</a></li>
+            <li><a class="track" href="81-chemikal-mind-lugar-de-misterio-original-mix.mp3" data-artist="Chemikal Mind" data-title="Lugar De Misterio"><span class="track-num">81</span> Lugar De Misterio</a></li>
+            <li><a class="track" href="82-weirdel-bravo-zulu-original-mix.mp3" data-artist="WeiRdel" data-title="Bravo Zulu"><span class="track-num">82</span> Bravo Zulu</a></li>
+            <li><a class="track" href="83-sample-bugs-trella-original-mix.mp3" data-artist="Sample Bugs" data-title="Trella"><span class="track-num">83</span> Trella</a></li>
+            <li><a class="track" href="84-universal-mind-gate-dark-ohmega-original-mix.mp3" data-artist="Universal Mind" data-title="Dark Ohmega"><span class="track-num">84</span> Dark Ohmega</a></li>
+            <li><a class="track" href="85-shiva-shambho-kali-meli-original-mix.mp3" data-artist="Shiva" data-title="Kali Meli"><span class="track-num">85</span> Kali Meli</a></li>
+            <li><a class="track" href="86-subliminal-insane-demanding-ears-denstrow-remix.mp3" data-artist="Subliminal" data-title="Demanding Ears"><span class="track-num">86</span> Demanding Ears</a></li>
+            <li><a class="track" href="87-polyplex-broken-pop-original-mix.mp3" data-artist="Polyplex" data-title="Broken Pop"><span class="track-num">87</span> Broken Pop</a></li>
+            <li><a class="track" href="88-arc-voyager-25-recurring-numbers-original-mix.mp3" data-artist="Arc Voyager" data-title="Recurring Numbers"><span class="track-num">88</span> Recurring Numbers</a></li>
+            <li><a class="track" href="89-ancestral-connexion-waiting-existence-original-mix.mp3" data-artist="Ancestral" data-title="Waiting Existence"><span class="track-num">89</span> Waiting Existence</a></li>
+            <li><a class="track" href="90-hedlok-mystics-original-mix.mp3" data-artist="Hedlok" data-title="Mystics"><span class="track-num">90</span> Mystics</a></li>
+            <li><a class="track" href="91-christos-koulaxizis-dionisis-haritopoulos-analog-calm-original-mix.mp3" data-artist="Christos K." data-title="Analog Calm"><span class="track-num">91</span> Analog Calm</a></li>
+            <li><a class="track" href="92-endemico-please-insert-disk-2-original-mix.mp3" data-artist="Endemico" data-title="Insert Disk 2"><span class="track-num">92</span> Insert Disk 2</a></li>
+            <li><a class="track" href="93-jedidiah-existence-being-original-mix.mp3" data-artist="Jedidiah" data-title="Existence Being"><span class="track-num">93</span> Existence Being</a></li>
+            <li><a class="track" href="94-phaze-control-music-from-the-streets-original-mix.mp3" data-artist="Phaze Control" data-title="Music Streets"><span class="track-num">94</span> Music Streets</a></li>
+            <li><a class="track" href="95-amos-things-and-stuff-original-mix.mp3" data-artist="Amos" data-title="Things and Stuff"><span class="track-num">95</span> Things and Stuff</a></li>
+            <li><a class="track" href="96-planetarychild-it-was-in-yhe-sky-original-mix.mp3" data-artist="PlanetaryChild" data-title="In the Sky"><span class="track-num">96</span> In the Sky</a></li>
+            <li><a class="track" href="97-individuum-overcoming-4-original-mix.mp3" data-artist="Individuum" data-title="Overcoming 4"><span class="track-num">97</span> Overcoming 4</a></li>
+            <li><a class="track" href="98-dusha-aurora-original-mix.mp3" data-artist="Dusha" data-title="Aurora"><span class="track-num">98</span> Aurora</a></li>
+            <li><a class="track" href="99-chichilcitlalli-welcome-to-my-jungle-original-mix.mp3" data-artist="Chichil" data-title="Welcome Jungle"><span class="track-num">99</span> Welcome Jungle</a></li>
+        </ol>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var current = 0;
+        var $audio = $('#player');
+        var $playlist = $('#playlist');
+        var $tracks = $playlist.find('li a.track');
+        var len = $tracks.length;
+        var $disc = $('#disc');
+
+        // Initial metadata
+        updateUI($($tracks[0]));
+
+        // Click track
+        $playlist.on('click', 'a.track', function (e) {
+            e.preventDefault();
+            play($(this));
+        });
+
+        // Disc Animation
+        $audio.on('play', function() { $disc.removeClass('paused'); });
+        $audio.on('pause ended', function() { $disc.addClass('paused'); });
+
+        // Auto-next
+        $audio[0].addEventListener('ended', playNext);
+
+        // Controls
+        $('#nextBtn').on('click', function() { playNext(); });
+        $('#prevBtn').on('click', function() { playPrev(); });
+
+        function playNext() {
+            current = (current + 1) % len;
+            play($($tracks[current]));
+        }
+
+        function playPrev() {
+            current = (current - 1 + len) % len;
+            play($($tracks[current]));
+        }
+
+        function play($link) {
+            current = $link.parent().index();
+            $audio[0].src = $link.attr('href');
+            $link.parent().addClass('active').siblings().removeClass('active');
+            
+            updateUI($link);
+            
+            $audio[0].load();
+            $audio[0].play().catch(e => console.log("Playback blocked by browser settings. User must click first."));
+
+            // Auto-scroll logic
+            var container = $('#playlist');
+            var scrollTo = $link.parent();
+            container.animate({
+                scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop() - 100
+            }, 500);
+        }
+
+        function updateUI($link) {
+            $('#current-title').text($link.data('title'));
+            $('#current-artist').text($link.data('artist'));
+            
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: $link.data('title'),
+                    artist: $link.data('artist'),
+                    artwork: [{ src: 'https://via.placeholder.com/512', sizes: '512x512', type: 'image/png' }]
+                });
+            }
+        }
+
+        // Media keys
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.setActionHandler('nexttrack', playNext);
+            navigator.mediaSession.setActionHandler('previoustrack', playPrev);
+        }
+    });
+</script>
+
+</body>
+</html>
